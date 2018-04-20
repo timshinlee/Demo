@@ -8,7 +8,7 @@ encapsulates the operations on system's default camera app.
 
 1. add jitpack as a repository:
 
-```
+```gradle
 allprojects {
   repositories {
     ...
@@ -19,7 +19,7 @@ allprojects {
 
 2. add dependency in module's build.gradle:
 
-```
+```gradle
 dependencies {
     compile 'com.github.timshinlee:ImageCaptureManager:1.0.0'
 }
@@ -29,7 +29,7 @@ dependencies {
 
 1. require permission if needed
 
-```
+```xml
 <manifest>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application></application>
@@ -38,7 +38,7 @@ dependencies {
 
 2. create a path file in res/xml folder to set the path shown to other apps. For example, res/xml/file_paths.xml:
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
     <external-path
@@ -49,7 +49,7 @@ dependencies {
 
 3. add a file provider in the manifest, set the `authorities` attribute to your own package, and set the path file as its resource:
 
-```
+```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.timshinlee.demo">
     
@@ -80,13 +80,13 @@ mManager = new ImageCaptureManager.Builder()
 
 2. take photo when needed
 
-```
+```java
 mManager.takePhoto(this);
 ```
 
 3. deal with the result
 
-```
+```java
 @Override
 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     final String imagePath = mManager.onActivityResult(requestCode, resultCode, data);
@@ -95,7 +95,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 4. deal with permission if needed
 
-```
+```java
 @Override
 public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
     mManager.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
